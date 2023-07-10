@@ -73,8 +73,10 @@ def calculate_2021gfrC(scr, scys, age, sex):
         gfr = 135 * (scr/A)**B * (scys/C)**D * 0.9961**age * 0.963
     return gfr
 
+
 # Streamlit app
-st.title('2021 CKD-EPI Creatinine Equations for Glomerular Filtration Rate (GFR)')
+st.markdown(
+    "# [2021 CKD-EPI Creatinine Equations for Glomerular Filtration Rate (GFR)](https://www.mdcalc.com/calc/3939/ckd-epi-equations-glomerular-filtration-rate-gfr)")
 st.write("Estimates GFR based on serum creatinine, serum cystatin C, or both.")
 
 # info = st.button("Important Info")
