@@ -1,5 +1,6 @@
 import streamlit as st
 
+# Equations
 def calculate_2021gfr(scr, age, sex):
     # 2021 CKD-EPI creatinine equation for GFR
     if sex == 'Male':
@@ -73,17 +74,36 @@ def calculate_2021gfrC(scr, scys, age, sex):
     return gfr
 
 # Streamlit app
-st.title('2021 CKD-EPI Creatinine Equations for Glomerular Filtration Rate')
+st.title('2021 CKD-EPI Creatinine Equations for Glomerular Filtration Rate (GFR)')
+st.write("Estimates GFR based on serum creatinine, serum cystatin C, or both.")
+
+# info = st.button("Important Info")
+
+st.write("""
+The 2021 CKD-EPI equation is now the recommended standard. 
+This version does not include race, as do the 2009 and 2012 CKD-EPI creatinine and creatinine-cystatin C equations.
+With the 2021 equation, for the same creatinine value, the 2021 equation will estimate a lower GFR for 
+Black patients and a higher GFR for non-Black patients.
+""")
+
+instructions = st.button("Instructions")
+
+if instructions:
+    st.write("""For use in patients with stable kidney function. While the combined creatinine and cystatin C equation can add accuracy, cystatin c is not available in all laboratories and the creatinine-based equation is adequate for many clinical purposes.
+
+2021 CKD-EPI creatinine is currently recommended by the ASN and NKF for GFR reporting in the United States.
+""")
+
 st.sidebar.title("Equation")
 equation = st.sidebar.radio("Select an Equation",
                             ("2021 CKD-EPI Creatinine",
                             "2021 CKD-EPI Creatinine-Crystatin C"))
 
-scr = st.number_input(
-    'Enter your Serum creatinine (mg/dL)', min_value=0.0, max_value=20.0, step=0.1)
 age = st.number_input('Enter your Age (years)', min_value=1, max_value=120, step=1)
 sex = st.selectbox('Select your Sex', options=['Male', 'Female'])
 
+scr = st.number_input(
+    'Enter your Serum creatinine (mg/dL)', min_value=0.0, max_value=20.0, step=0.1)
 if equation == "2021 CKD-EPI Creatinine-Crystatin C":
     scys = st.number_input(
         'Enter your Serum cystatin C (mg/L)', min_value=0.0, max_value=20.0, step=0.1)
